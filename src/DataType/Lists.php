@@ -20,7 +20,6 @@ class Lists extends DataType
         $key = array_get($params, 'key');
 
         if (array_has($params, 'push')) {
-
             $item = array_get($params, 'item');
             $command = $params['push'] == 'left' ? 'lpush' : 'rpush';
 
@@ -40,9 +39,9 @@ class Lists extends DataType
      */
     public function store(array $params)
     {
-        $key    = array_get($params, 'key');
-        $item  = array_get($params, 'item');
-        $ttl    = array_get($params, 'ttl');
+        $key = array_get($params, 'key');
+        $item = array_get($params, 'item');
+        $ttl = array_get($params, 'ttl');
 
         $this->getConnection()->rpush($key, [$item]);
 
@@ -60,11 +59,12 @@ class Lists extends DataType
      * Remove a member from list by index.
      *
      * @param array $params
+     *
      * @return mixed
      */
     public function remove(array $params)
     {
-        $key   = array_get($params, 'key');
+        $key = array_get($params, 'key');
         $index = array_get($params, 'index');
 
         $lua = <<<'LUA'

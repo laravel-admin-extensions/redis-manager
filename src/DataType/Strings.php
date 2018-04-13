@@ -25,9 +25,9 @@ class Strings extends DataType
      */
     public function store(array $params)
     {
-        $key    = array_get($params, 'key');
-        $value  = array_get($params, 'value');
-        $ttl    = array_get($params, 'ttl');
+        $key = array_get($params, 'key');
+        $value = array_get($params, 'value');
+        $ttl = array_get($params, 'ttl');
 
         $this->getConnection()->set($key, $value);
 
@@ -36,7 +36,7 @@ class Strings extends DataType
         }
 
         return redirect(route('redis-index', [
-            'conn' => request('conn')
+            'conn' => request('conn'),
         ]));
     }
 }
