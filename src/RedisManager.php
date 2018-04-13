@@ -17,8 +17,7 @@ use Predis\Collection\Iterator\Keyspace;
 use Predis\Pipeline\Pipeline;
 
 /**
- * Class RedisManager
- * @package Encore\Admin\RedisManager
+ * Class RedisManager.
  */
 class RedisManager extends Extension
 {
@@ -164,7 +163,7 @@ class RedisManager extends Extension
      * Scan keys in redis by giving pattern.
      *
      * @param string $pattern
-     * @param int $count
+     * @param int    $count
      *
      * @return array|\Predis\Pipeline\Pipeline
      */
@@ -214,7 +213,7 @@ LUA;
         $class = $this->{$type}();
 
         $value = $class->fetch($key);
-        $ttl   = $class->ttl($key);
+        $ttl = $class->ttl($key);
 
         return compact('key', 'value', 'ttl', 'type');
     }
@@ -228,7 +227,7 @@ LUA;
      */
     public function update(Request $request)
     {
-        $key  = $request->get('key');
+        $key = $request->get('key');
         $type = $request->get('type');
 
         /** @var DataType $class */
@@ -256,9 +255,10 @@ LUA;
     }
 
     /**
-     * 运行redis命令
+     * 运行redis命令.
      *
      * @param string $command
+     *
      * @return mixed
      */
     public function execute($command)

@@ -11,14 +11,13 @@ use Illuminate\Support\Str;
 class RedisController extends BaseController
 {
     /**
-     * Index page
+     * Index page.
      *
      * @return Content
      */
     public function index()
     {
         return Admin::content(function (Content $content) {
-
             $content->header('Redis manager');
             $content->description('Connections');
             $content->breadcrumb(['text' => 'Redis manager']);
@@ -51,7 +50,6 @@ class RedisController extends BaseController
     public function edit(Request $request)
     {
         return Admin::content(function (Content $content) use ($request) {
-
             $connection = $request->get('conn', 'default');
 
             $manager = $this->manager();
@@ -80,15 +78,15 @@ class RedisController extends BaseController
     }
 
     /**
-     * Create page
+     * Create page.
      *
      * @param Request $request
+     *
      * @return Content
      */
     public function create(Request $request)
     {
         return Admin::content(function (Content $content) use ($request) {
-
             $connection = $request->get('conn', 'default');
 
             $manager = $this->manager();
@@ -136,6 +134,7 @@ class RedisController extends BaseController
 
     /**
      * @param Request $request
+     *
      * @return array
      */
     public function fetch(Request $request)
@@ -145,6 +144,7 @@ class RedisController extends BaseController
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function remove(Request $request)
@@ -156,6 +156,7 @@ class RedisController extends BaseController
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function update(Request $request)
@@ -173,7 +174,6 @@ class RedisController extends BaseController
     public function console(Request $request)
     {
         return Admin::content(function (Content $content) use ($request) {
-
             $connection = $request->get('conn', 'default');
 
             $manager = $this->manager();
@@ -197,7 +197,7 @@ class RedisController extends BaseController
     }
 
     /**
-     * Execute a redis command
+     * Execute a redis command.
      *
      * @param Request $request
      *
@@ -224,6 +224,7 @@ class RedisController extends BaseController
      * Render exception.
      *
      * @param \Exception $exception
+     *
      * @return string
      */
     protected function renderException(\Exception $exception)
