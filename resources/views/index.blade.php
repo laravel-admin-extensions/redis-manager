@@ -111,23 +111,25 @@
                     title: "Delete key ["+key+"] ?",
                     type: "error",
                     showCancelButton: true
-                },
-                function(){
-                    var params = {
-                        conn: "{{ $conn }}",
-                        key: key,
-                        _token: LA.token
-                    };
+                }).then(function (result) {
+                    if (result.value) {
 
-                    $.ajax({
-                        url: '{{ route('redis-key-delete') }}',
-                        type: 'DELETE',
-                        data: params,
-                        success: function(result) {
-                            toastr.success('Key '+key+' deleted');
-                            $.pjax.reload('#pjax-container');
-                        }
-                    });
+                        var params = {
+                            conn: "{{ $conn }}",
+                            key: key,
+                            _token: LA.token
+                        };
+
+                        $.ajax({
+                            url: '{{ route('redis-key-delete') }}',
+                            type: 'DELETE',
+                            data: params,
+                            success: function (result) {
+                                toastr.success('Key ' + key + ' deleted');
+                                $.pjax.reload('#pjax-container');
+                            }
+                        });
+                    }
                 });
         });
 
@@ -143,24 +145,26 @@
                     title: "Delete selected keys ?",
                     type: "error",
                     showCancelButton: true
-                },
-                function(){
+                }).then(function (result) {
+                    if (result.value) {
 
-                    var params = {
-                        conn: "{{ $conn }}",
-                        key: keys,
-                        _token: LA.token
-                    };
 
-                    $.ajax({
-                        url: '{{ route('redis-key-delete') }}',
-                        type: 'DELETE',
-                        data: params,
-                        success: function(result) {
-                            toastr.success(params.key.length+' keys deleted');
-                            $.pjax.reload('#pjax-container');
-                        }
-                    });
+                        var params = {
+                            conn: "{{ $conn }}",
+                            key: keys,
+                            _token: LA.token
+                        };
+
+                        $.ajax({
+                            url: '{{ route('redis-key-delete') }}',
+                            type: 'DELETE',
+                            data: params,
+                            success: function (result) {
+                                toastr.success(params.key.length + ' keys deleted');
+                                $.pjax.reload('#pjax-container');
+                            }
+                        });
+                    }
                 });
         });
 
