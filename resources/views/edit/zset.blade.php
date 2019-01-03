@@ -116,8 +116,8 @@
                         title: "Remove from list ?",
                         type: "error",
                         showCancelButton: true
-                    },
-                    function(){
+                    })
+                    .then(function(){
 
                         var params = {
                             key: key,
