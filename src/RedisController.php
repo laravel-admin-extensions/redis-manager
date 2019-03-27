@@ -161,7 +161,9 @@ class RedisController extends BaseController
      */
     public function update(Request $request)
     {
-        return $this->manager()->update($request);
+        $this->manager()->update($request);
+        admin_toastr('Update successfully');
+        return back();
     }
 
     /**
