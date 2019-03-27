@@ -13,21 +13,21 @@
                 <label for="inputKey" class="col-sm-2 control-label">Key</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control key" name="key" id="inputKey" placeholder="key" readonly value="{{ $data['key'] or '' }}">
+                    <input type="text" class="form-control key" name="key" id="inputKey" placeholder="key" readonly value="{{ $data['key'] }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputValue" class="col-sm-2 control-label">Value</label>
 
                 <div class="col-sm-10">
-                    <textarea class="form-control value" id="inputValue" rows="6" name="value">{{ $data['value'] or '' }}</textarea>
+                    <textarea class="form-control value" id="inputValue" rows="6" name="value">{{ $data['value'] }}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputExpire" class="col-sm-2 control-label">Expire</label>
 
                 <div class="col-sm-10">
-                    <input type="number" class="form-control expire" id="inputExpire" name="ttl" value="{{ $data['ttl'] or -1 }}">
+                    <input type="number" class="form-control expire" id="inputExpire" name="ttl" value="{{ $data['ttl'] }}">
                 </div>
             </div>
 
