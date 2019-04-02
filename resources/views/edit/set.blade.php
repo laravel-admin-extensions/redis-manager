@@ -16,7 +16,7 @@
                     <label for="inputKey" class="col-sm-2 control-label">Key</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control key" id="inputKey" placeholder="key" readonly value="{{ $data['key'] or '' }}">
+                        <input type="text" class="form-control key" id="inputKey" placeholder="key" readonly value="{{ $data['key'] ?? '' }}">
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                     <label for="inputExpire" class="col-sm-2 control-label">Expires</label>
 
                     <div class="col-sm-10">
-                        <input type="number" class="form-control ttl" id="inputExpire"  value="{{ $data['ttl'] or -1 }}">
+                        <input type="number" class="form-control ttl" id="inputExpire"  value="{{ $data['ttl'] ?? -1 }}">
                     </div>
                 </div>
 
