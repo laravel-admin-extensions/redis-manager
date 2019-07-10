@@ -75,7 +75,7 @@
                     <td><code>{{ $key[0] }}</code></td>
                     <td>
                         @php($type = $key[1]->getPayload())
-                            <span class="label label-{{ \Encore\Admin\RedisManager\RedisManager::$typeColor[$type] }}">{{ $type }}</span>
+                            <span class="label label-{{ \Encore\Admin\RedisManager\RedisManager::typeColor($type) }}">{{ $type }}</span>
                     </td>
                     <td>{{ $key[2] }}</td>
                     <td>

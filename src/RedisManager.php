@@ -11,6 +11,7 @@ use Encore\Admin\RedisManager\DataType\SortedSets;
 use Encore\Admin\RedisManager\DataType\Strings;
 use Illuminate\Http\Request;
 use Illuminate\Redis\Connections\Connection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redis;
 use Predis\Collection\Iterator\Keyspace;
@@ -266,5 +267,15 @@ LUA;
         $command = explode(' ', $command);
 
         return $this->getConnection()->executeRaw($command);
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return mixed
+     */
+    public static function typeColor($type)
+    {
+        return Arr::get(static::$typeColor, $type, 'default');
     }
 }

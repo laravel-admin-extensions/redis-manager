@@ -44,7 +44,7 @@
                         @foreach($connections[$conn] as $name => $value)
                             <tr>
                                 <td width="160px">{{ $name }}</td>
-                                <td><span class="label label-primary">{{ $value }}</span></td>
+                                <td><span class="label label-primary">{{ is_array($value) ? json_encode($value) : $value }}</span></td>
                             </tr>
                         @endforeach
                     </table>

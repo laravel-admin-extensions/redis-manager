@@ -25,7 +25,7 @@ class RedisController extends BaseController
             $connection = request('conn', 'default');
 
             $manager = $this->manager();
-
+//dd($manager->getConnections());
             $variables = [
                 'conn'        => $connection,
                 'info'        => $manager->getInformation(),
