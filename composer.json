@@ -1,8 +1,8 @@
 {
     "name": "pennfly/redis-manager",
-    "description": "Redis manager for laravel-admin ， and do my self",
+    "description": "Redis manager for laravel-admin . This is a fork project, because I want fix chagne config phpredis had err.",
     "type": "library",
-    "keywords": ["laravel-admin", "redis", "manager"],
+    "keywords": ["laravel-admin", "redis", "manager", "phpredis"],
     "homepage": "https://github.com/pennfly/redis-manager",
     "license": "MIT",
     "authors": [
