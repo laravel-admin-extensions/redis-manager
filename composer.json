@@ -1,14 +1,14 @@
 {
-    "name": "laravel-admin-ext/redis-manager",
-    "description": "Redis manager for laravel-admin",
+    "name": "pennfly/redis-manager",
+    "description": "Redis manager for laravel-admin ， and do my self",
     "type": "library",
     "keywords": ["laravel-admin", "redis", "manager"],
-    "homepage": "https://github.com/laravel-admin-extensions/redis-manager",
+    "homepage": "https://github.com/pennfly/redis-manager",
     "license": "MIT",
     "authors": [
         {
-            "name": "z-song",
-            "email": "zosong@126.com"
+            "name": "pennfly",
+            "email": "pennilessfor@gmail.com"
         }
     ],
     "require": {
