@@ -146,7 +146,7 @@ class RedisManager extends Extension
         if ($connection) {
             $this->connection = $connection;
         }
-
+        Redis::setDriver('predis');
         return Redis::connection($this->connection);
     }
 
