@@ -102,6 +102,7 @@ class RedisManager extends Extension
 
     /**
      * @param string $key
+     *
      * @return array|string|null
      */
     public function trimPrefix($key)
@@ -111,6 +112,7 @@ class RedisManager extends Extension
         }
 
         $prefix = $this->getPrefix();
+
         return preg_replace("/^$prefix/", "", $key);
     }
 
@@ -205,7 +207,7 @@ class RedisManager extends Extension
         $client = $this->getConnection();
         $keys = [];
 
-        $pattern = $this->getPrefix() . $pattern;
+        $pattern = $this->getPrefix().$pattern;
         foreach (new Keyspace($client->client(), $pattern) as $item) {
             $keys[] = $item;
 
@@ -250,7 +252,7 @@ LUA;
 
         $value = $class->fetch($key);
         $ttl = $class->ttl($key);
-        $key = $this->getPrefix() . $key;
+        $key = $this->getPrefix().$key;
 
         return compact('key', 'value', 'ttl', 'type');
     }
