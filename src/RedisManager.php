@@ -205,6 +205,7 @@ class RedisManager extends Extension
         $client = $this->getConnection();
         $keys = [];
 
+        $pattern = $this->getPrefix() . $pattern;
         foreach (new Keyspace($client->client(), $pattern) as $item) {
             $keys[] = $item;
 
