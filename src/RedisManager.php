@@ -266,14 +266,14 @@ LUA;
         $key = $request->get('key');
         $type = $request->get('type');
 
+        $key = $this->trimPrefix($key);
         $params = $request->all();
-        $params['key'] = $this->trimPrefix($key);
+        $params['key'] = $key;
 
         /** @var DataType $class */
         $class = $this->{$type}();
 
         $class->update($params);
-
         $class->setTtl($key, $request->get('ttl'));
     }
 
