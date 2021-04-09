@@ -25,7 +25,7 @@ class RedisController extends BaseController
             $connection = request('conn', 'default');
 
             $manager = $this->manager();
-//dd($manager->getConnections());
+            //dd($manager->getConnections());
             $variables = [
                 'conn'        => $connection,
                 'info'        => $manager->getInformation(),
@@ -151,7 +151,10 @@ class RedisController extends BaseController
     {
         $type = $request->get('type');
 
-        return $this->manager()->{$type}()->remove($request->all());
+        $params = $request->all();
+        $params['key'] = $this->manager()->trimPrefix($request->get('key'));
+
+        return $this->manager()->{$type}()->remove($params);
     }
 
     /**

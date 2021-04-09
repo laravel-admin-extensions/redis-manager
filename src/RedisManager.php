@@ -57,6 +57,11 @@ class RedisManager extends Extension
     protected $connection;
 
     /**
+     * @var string
+     */
+    protected $prefix = '';
+
+    /**
      * Get instance of redis manager.
      *
      * @param string $connection
@@ -80,6 +85,35 @@ class RedisManager extends Extension
     public function __construct($connection = 'default')
     {
         $this->connection = $connection;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrefix()
+    {
+        $prefix = $this->getConnection()->getOptions()->prefix;
+        if ($prefix) {
+            $this->prefix = $prefix->getPrefix();
+        }
+
+        return $this->prefix;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return array|string|null
+     */
+    public function trimPrefix($key)
+    {
+        if (!$key) {
+            return $key;
+        }
+
+        $prefix = $this->getPrefix();
+
+        return preg_replace("/^$prefix/", '', $key);
     }
 
     /**
@@ -173,6 +207,7 @@ class RedisManager extends Extension
         $client = $this->getConnection();
         $keys = [];
 
+        $pattern = $this->getPrefix().$pattern;
         foreach (new Keyspace($client->client(), $pattern) as $item) {
             $keys[] = $item;
 
@@ -190,6 +225,7 @@ LUA;
 
         return $client->pipeline(function (Pipeline $pipe) use ($keys, $script) {
             foreach ($keys as $key) {
+                $key = $this->trimPrefix($key);
                 $pipe->eval($script, 1, $key);
             }
         });
@@ -204,6 +240,7 @@ LUA;
      */
     public function fetch($key)
     {
+        $key = $this->trimPrefix($key);
         if (!$this->getConnection()->exists($key)) {
             return [];
         }
@@ -215,6 +252,7 @@ LUA;
 
         $value = $class->fetch($key);
         $ttl = $class->ttl($key);
+        $key = $this->getPrefix().$key;
 
         return compact('key', 'value', 'ttl', 'type');
     }
@@ -231,11 +269,14 @@ LUA;
         $key = $request->get('key');
         $type = $request->get('type');
 
+        $key = $this->trimPrefix($key);
+        $params = $request->all();
+        $params['key'] = $key;
+
         /** @var DataType $class */
         $class = $this->{$type}();
 
-        $class->update($request->all());
-
+        $class->update($params);
         $class->setTtl($key, $request->get('ttl'));
     }
 
@@ -250,6 +291,12 @@ LUA;
     {
         if (is_string($key)) {
             $key = [$key];
+        }
+
+        if (is_array($key)) {
+            foreach ($key as $index => $key_item) {
+                $key[$index] = $this->trimPrefix($key_item);
+            }
         }
 
         return $this->getConnection()->del($key);
