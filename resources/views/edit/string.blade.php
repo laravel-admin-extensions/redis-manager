@@ -7,7 +7,7 @@
         <h3 class="box-title">Edit</h3> <small></small>
     </div>
 
-    <form class="form-horizontal" method="post" action="{{ route('redis-update-key') }}" pjax-container>
+    <form class="form-horizontal">
         <div class="box-body">
             <div class="form-group">
                 <label for="inputKey" class="col-sm-2 control-label">Key</label>
@@ -42,7 +42,7 @@
 
             <div class="col-sm-offset-2">
             <button type="reset" class="btn btn-default pull-right">Reset</button>
-            <button class="btn btn-info">Submit</button>
+            <button class="btn btn-info update-string">Submit</button>
             </div>
         </div>
 
@@ -50,5 +50,41 @@
 
 </div>
 <!-- /.box-body -->
+
+<script>
+    $(function () {
+        $('.update-string').on('click', function (event) {
+            event.preventDefault();
+
+            var key = $('input.key').val();
+            var value = $('textarea.value').val();
+            var ttl = $('input.expire').val();
+
+            if (key == '' || value == '') {
+                return;
+            }
+
+            var params = {
+                key: key,
+                value: value,
+                conn: "{{ $conn }}",
+                ttl: ttl,
+                type:'string',
+                _token: LA.token
+            };
+
+            $.ajax({
+                url: '{{ route('redis-update-key') }}',
+                type: 'PUT',
+                data: params,
+                success: function(result) {
+                    toastr.success('Add success.');
+                    $.pjax.reload('#pjax-container');
+                }
+            });
+
+        });
+    })
+</script>
 
 @endsection
