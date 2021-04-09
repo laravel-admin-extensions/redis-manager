@@ -113,7 +113,7 @@ class RedisManager extends Extension
 
         $prefix = $this->getPrefix();
 
-        return preg_replace("/^$prefix/", "", $key);
+        return preg_replace("/^$prefix/", '', $key);
     }
 
     /**
