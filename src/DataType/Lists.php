@@ -2,6 +2,8 @@
 
 namespace Encore\Admin\RedisManager\DataType;
 
+use Illuminate\Support\Arr;
+
 class Lists extends DataType
 {
     /**
@@ -17,18 +19,18 @@ class Lists extends DataType
      */
     public function update(array $params)
     {
-        $key = array_get($params, 'key');
+        $key = Arr::get($params, 'key');
 
-        if (array_has($params, 'push')) {
-            $item = array_get($params, 'item');
+        if (Arr::has($params, 'push')) {
+            $item = Arr::get($params, 'item');
             $command = $params['push'] == 'left' ? 'lpush' : 'rpush';
 
             $this->getConnection()->{$command}($key, $item);
         }
 
-        if (array_has($params, '_editable')) {
-            $value = array_get($params, 'value');
-            $index = array_get($params, 'pk');
+        if (Arr::has($params, '_editable')) {
+            $value = Arr::get($params, 'value');
+            $index = Arr::get($params, 'pk');
 
             $this->getConnection()->lset($key, $index, $value);
         }
@@ -39,9 +41,9 @@ class Lists extends DataType
      */
     public function store(array $params)
     {
-        $key = array_get($params, 'key');
-        $item = array_get($params, 'item');
-        $ttl = array_get($params, 'ttl');
+        $key = Arr::get($params, 'key');
+        $item = Arr::get($params, 'item');
+        $ttl = Arr::get($params, 'ttl');
 
         $this->getConnection()->rpush($key, [$item]);
 
@@ -64,8 +66,8 @@ class Lists extends DataType
      */
     public function remove(array $params)
     {
-        $key = array_get($params, 'key');
-        $index = array_get($params, 'index');
+        $key = Arr::get($params, 'key');
+        $index = Arr::get($params, 'index');
 
         $lua = <<<'LUA'
 redis.call('lset', KEYS[1], ARGV[1], '__DELETED__');
