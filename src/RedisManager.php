@@ -57,11 +57,6 @@ class RedisManager extends Extension
     protected $connection;
 
     /**
-     * @var string
-     */
-    protected $prefix = '';
-
-    /**
      * Get instance of redis manager.
      *
      * @param string $connection
@@ -92,12 +87,7 @@ class RedisManager extends Extension
      */
     public function getPrefix()
     {
-        $prefix = $this->getConnection()->getOptions()->prefix;
-        if ($prefix) {
-            $this->prefix = $prefix->getPrefix();
-        }
-
-        return $this->prefix;
+        return config('database.redis.options.prefix', '');
     }
 
     /**
