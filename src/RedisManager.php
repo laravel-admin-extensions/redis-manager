@@ -114,12 +114,12 @@ class RedisManager extends Extension
     public function getDataTypePhpRedis()
     {
         return [
-            PhpRedis::REDIS_STRING => 'string',
-            PhpRedis::REDIS_SET => 'set',
-            PhpRedis::REDIS_LIST => 'list',
-            PhpRedis::REDIS_ZSET => 'zset',
-            PhpRedis::REDIS_HASH => 'hash',
-            PhpRedis::REDIS_STREAM => 'stream',
+            PhpRedis::REDIS_STRING    => 'string',
+            PhpRedis::REDIS_SET       => 'set',
+            PhpRedis::REDIS_LIST      => 'list',
+            PhpRedis::REDIS_ZSET      => 'zset',
+            PhpRedis::REDIS_HASH      => 'hash',
+            PhpRedis::REDIS_STREAM    => 'stream',
             PhpRedis::REDIS_NOT_FOUND => 'none',
         ];
     }
@@ -302,9 +302,9 @@ LUA;
             $keys = array_map(function ($key) use ($client) {
                 $key = $this->trimPrefix($key);
                 return [
-                    '0' => $this->getPrefix() . $key,
+                    '0' => $this->getPrefix().$key,
                     '1' => Arr::get($this->dataTypePhpRedis, $client->type($key)),
-                    '2' => $client->ttl($key)
+                    '2' => $client->ttl($key),
                 ];
             }, $keys);
         }
