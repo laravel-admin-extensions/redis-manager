@@ -296,11 +296,13 @@ LUA;
             });
             $keys = array_map(function ($key) {
                 $key[1] = $key[1]->getPayload();
+
                 return $key;
             }, $keys);
         } else {
             $keys = array_map(function ($key) use ($client) {
                 $key = $this->trimPrefix($key);
+
                 return [
                     '0' => $this->getPrefix().$key,
                     '1' => Arr::get($this->dataTypePhpRedis, $client->type($key)),
