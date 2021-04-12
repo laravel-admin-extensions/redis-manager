@@ -74,7 +74,7 @@
                     <td><input type="checkbox" class="key-select" data-key="{{ $key[0] }}"></td>
                     <td><code>{{ $key[0] }}</code></td>
                     <td>
-                        @php($type = $key[1]->getPayload())
+                        @php($type = $key[1])
                             <span class="label label-{{ \Encore\Admin\RedisManager\RedisManager::typeColor($type) }}">{{ $type }}</span>
                     </td>
                     <td>{{ $key[2] }}</td>
